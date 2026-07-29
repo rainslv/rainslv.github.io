@@ -1,12 +1,297 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>静夜思</title>
-  </head>
-  <body>
-    <h1>静夜思</h1>
-    <p>床前明月光，疑是地上霜。举头望明月，低头思故乡。</p>
-  </body>
+<html lang="zh-CN">
+<head>
+    <!-- 字符编码与视口设置，确保中文正常显示和移动端适配 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAINRAIN - 个人主页</title>
+    <!-- 使用一个干净的字体：Inter，来自 Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- 引用 Font Awesome 图标库，用于社交图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ---------- 全局重置与基础变量 ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 2rem;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+        }
+
+        /* ---------- 链接与按钮样式 ---------- */
+        a {
+            color: #2563eb;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        a:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+
+        /* ---------- 头部区域 ---------- */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #e9edf2;
+            padding-bottom: 2rem;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #dbeafe; /* 占位背景色 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e40af;
+            flex-shrink: 0;
+            /* 如果你有头像图片，可以用下面的代码替换上面这段 */
+            /* background-image: url('你的头像链接.jpg'); */
+            /* background-size: cover; */
+            /* background-position: center; */
+            /* color: transparent; /* 隐藏文字 */ 
+        }
+
+        .header-info h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.25rem;
+        }
+
+        .header-info .title {
+            font-size: 1.1rem;
+            color: #475569;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-info .bio {
+            color: #334155;
+            max-width: 500px;
+        }
+
+        /* ---------- 社交图标 ---------- */
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .social-links a {
+            font-size: 1.5rem;
+            color: #475569;
+            transition: color 0.2s, transform 0.1s;
+        }
+        .social-links a:hover {
+            color: #2563eb;
+            transform: scale(1.05);
+            text-decoration: none;
+        }
+
+        /* ---------- 通用章节标题 ---------- */
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin: 2.5rem 0 1.2rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .section-title i {
+            color: #2563eb;
+            font-size: 1.4rem;
+        }
+
+        /* ---------- 技能标签 ---------- */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem 1rem;
+            list-style: none;
+            margin-bottom: 0.5rem;
+        }
+        .skills li {
+            background: #f1f5f9;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            color: #1e293b;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* ---------- 项目卡片 ---------- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .project-card {
+            background: #f8fafc;
+            padding: 1.25rem 1.5rem;
+            border-radius: 1.2rem;
+            border: 1px solid #eef2f6;
+            transition: box-shadow 0.2s ease, transform 0.15s ease;
+        }
+        .project-card:hover {
+            box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+        .project-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+        .project-card p {
+            color: #475569;
+            font-size: 0.95rem;
+            margin-bottom: 0.7rem;
+        }
+        .project-card .project-link {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* ---------- 页脚 ---------- */
+        .footer {
+            margin-top: 3rem;
+            padding-top: 1.8rem;
+            border-top: 1px solid #e9edf2;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        /* ---------- 响应式微调 ---------- */
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.8rem 1rem;
+            }
+            .header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .header-info .bio {
+                max-width: 100%;
+            }
+            .social-links {
+                justify-content: center;
+            }
+            .section-title {
+                justify-content: center;
+            }
+            .skills {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ====== 头部 ====== -->
+    <header class="header">
+        <!-- 头像：如果是文字，修改 “你的名字” 为你的名字缩写；如果想用图片，见上面 style 中的注释 -->
+        <div class="avatar">你的名字</div>
+
+        <div class="header-info">
+            <h1>你的名字</h1>
+            <div class="title">💻 全栈开发者 · 创造者</div>
+            <p class="bio">
+                热爱编程、设计和技术写作。喜欢把想法变成产品，并持续学习新事物。
+            </p>
+            <!-- 社交链接：将 # 替换为你的真实链接，也可以增删图标 -->
+            <div class="social-links">
+                <a href="#" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" target="_blank" aria-label="博客"><i class="fas fa-blog"></i></a>
+                <a href="mailto:your-email@example.com" aria-label="邮件"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ====== 技能 ====== -->
+    <section>
+        <h2 class="section-title"><i class="fas fa-code"></i> 技术栈</h2>
+        <ul class="skills">
+            <li>JavaScript / TypeScript</li>
+            <li>React & Vue</li>
+            <li>Node.js</li>
+            <li>Python</li>
+            <li>Docker</li>
+            <li>Git & GitHub</li>
+        </ul>
+    </section>
+
+    <!-- ====== 项目 ====== -->
+    <section>
+        <h2 class="section-title"><i class="fas fa-folder-open"></i> 个人项目</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>项目 A</h3>
+                <p>一个简洁优雅的待办事项应用，支持多设备同步。</p>
+                <a href="#" class="project-link" target="_blank">查看项目 →</a>
+            </div>
+            <div class="project-card">
+                <h3>项目 B</h3>
+                <p>基于 Python 的自动化数据分析工具，用于处理 CSV 报表。</p>
+                <a href="#" class="project-link" target="_blank">查看项目 →</a>
+            </div>
+            <div class="project-card">
+                <h3>个人博客</h3>
+                <p>用 Vue 和 Vite 构建的静态博客，记录技术思考。</p>
+                <a href="#" class="project-link" target="_blank">访问博客 →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== 关于 / 联系 ====== -->
+    <section>
+        <h2 class="section-title"><i class="fas fa-address-card"></i> 联系我</h2>
+        <p style="margin-bottom: 0.25rem;">
+            如果你有合作想法或只是想打个招呼，欢迎通过邮件或社交媒体联系。
+        </p>
+        <p style="color: #475569;">
+            📧 <a href="mailto:your-email@example.com">your-email@example.com</a>
+        </p>
+    </section>
+
+    <!-- ====== 页脚 ====== -->
+    <footer class="footer">
+        © 2026 你的名字 · 基于 GitHub Pages 搭建
+    </footer>
+
+</div>
+
+</body>
+</html>
